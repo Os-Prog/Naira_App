@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.moneyCheck),
+              icon: Icon(FontAwesomeIcons.dollarSign),
               title: Text(
                 'wallet',
                 style: TextStyle(fontSize: 0),
