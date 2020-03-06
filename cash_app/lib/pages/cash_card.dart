@@ -9,6 +9,7 @@ class _CashCardState extends State<CashCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Column(
         children: <Widget>[
           
