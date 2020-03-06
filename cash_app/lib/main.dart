@@ -7,7 +7,7 @@ import 'package:cash_app/pages/activity_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/services.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -26,10 +26,9 @@ class _MainAppState extends State<MainApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        accentColor: Colors.blue,
-        primaryColor: Colors.blue,
-        iconTheme: IconThemeData(color: Colors.white)
-      ),
+          accentColor: Colors.blue,
+          primaryColor: Colors.blue,
+          iconTheme: IconThemeData(color: Colors.white)),
       home: Home(),
     );
   }
@@ -41,7 +40,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   MyCashPage mycash;
   CashCard cashcard;
   WalletPage walletpage;
@@ -51,7 +49,7 @@ class _HomeState extends State<Home> {
   int currentIndexTab = 2;
   Widget currenttab;
 
-  void initState(){
+  void initState() {
     super.initState();
     mycash = MyCashPage();
     cashcard = CashCard();
@@ -75,7 +73,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.blue,
           unselectedIconTheme: IconThemeData(color: Colors.white70),
           selectedItemColor: Colors.white,
-          onTap: (int index){
+          onTap: (int index) {
             setState(() {
               currentIndexTab = index;
               currenttab = allpages[index];
@@ -89,24 +87,48 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.hashtag, size: 17,),
-              title: Text('home', style: TextStyle(fontSize: 0),),
+              icon: Icon(
+                FontAwesomeIcons.home,
+                size: 17,
+              ),
+              title: Text(
+                'home',
+                style: TextStyle(fontSize: 0),
+              ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.mobileAlt, size: 18,),
-              title: Text('contacts', style: TextStyle(fontSize: 0),),
+              icon: Icon(
+                FontAwesomeIcons.mobileAlt,
+                size: 18,
+              ),
+              title: Text(
+                'contacts',
+                style: TextStyle(fontSize: 0),
+              ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.dollarSign),
-              title: Text('wallet', style: TextStyle(fontSize: 0),),
+              icon: Icon(FontAwesomeIcons.moneyCheck),
+              title: Text(
+                'wallet',
+                style: TextStyle(fontSize: 0),
+              ),
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.sun, size: 19,),
-              title: Text('settings', style: TextStyle(fontSize: 0),),
+              icon: Icon(
+                FontAwesomeIcons.sun,
+                size: 19,
+              ),
+              title: Text(
+                'settings',
+                style: TextStyle(fontSize: 0),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.clock),
-              title: Text('activity', style: TextStyle(fontSize: 0),),
+              title: Text(
+                'activity',
+                style: TextStyle(fontSize: 0),
+              ),
             )
           ],
         ),
