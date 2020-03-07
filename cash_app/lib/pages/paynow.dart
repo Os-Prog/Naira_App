@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'choose_pay.dart';
 import 'confirm_payment.dart';
 
 class PayNow extends StatefulWidget {
@@ -48,7 +49,7 @@ class _PayNowState extends State<PayNow> {
                 onPressed: () {
                   if (_isbuttonActive)
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ConfirmPaymentScreen()));
+                        builder: (context) => ChoosePay()));
                 },
                 color:
                 _isbuttonActive ? _activeButtonColor : _inactiveButtonColor,

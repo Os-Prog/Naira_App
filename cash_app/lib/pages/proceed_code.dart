@@ -1,17 +1,18 @@
-import 'package:cash_app/pages/proceed_code.dart';
+import 'package:cash_app/pages/transfer_sucessful.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ConfirmPaymentScreen extends StatefulWidget {
+class ProceedLink extends StatefulWidget {
   @override
-  _ConfirmPaymentScreenState createState() => _ConfirmPaymentScreenState();
+  _ProceedLinkState createState() => _ProceedLinkState();
 }
 
-class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
+class _ProceedLinkState extends State<ProceedLink> {
   Color _activeButtonColor = Colors.blue;
   Color _inactiveButtonColor = Colors.black26;
-  bool _isbuttonActive = true;
+  bool _isbuttonActive = false;
   var transferCode = 345.4;
+  var inpvalue;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -35,18 +36,18 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
               child: RaisedButton(
                 elevation: 10,
                 onPressed: () {
-//                  if (_isbuttonActive)
+                  if (_isbuttonActive)
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ProceedLink()));
+                        builder: (context) => TransferOkay()));
                 },
                 color:
-                    _isbuttonActive ? _activeButtonColor : _inactiveButtonColor,
+                _isbuttonActive ? _activeButtonColor : _inactiveButtonColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Container(
                   child: Text(
-                    'Proceed',
+                    'Confirm',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -85,7 +86,7 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                             child: Text(
                               'Security Questions',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 22),
+                              TextStyle(color: Colors.white, fontSize: 22),
                             ),
                             margin: EdgeInsets.only(bottom: 15),
                           ),
@@ -95,84 +96,34 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                         children: <Widget>[
                           Expanded(
                             child: TextFormField(
+                              onChanged: (value){
+                                setState(() {
+                                  inpvalue = value;
+                                  if(inpvalue.toString().length > 2){
+                                    _isbuttonActive = true;
+                                  }else{
+                                    _isbuttonActive = false;
+                                  }
+                                });
+                              },
                               obscureText: true,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              TextStyle(color: Colors.white, fontSize: 18),
                               cursorColor: Colors.white,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Colors.white)),
+                                    BorderSide(color: Colors.white)),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
-                                labelText: 'Enter your transfer code',
+                                labelText: 'Enter next security code',
                                 labelStyle: TextStyle(
                                   color: Colors.white,
                                 ),
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(19, 5, 10, 5),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 27.0,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              obscureText: true,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                labelText: 'Enter your safe key',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(19, 5, 10, 5),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 27.0,
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              obscureText: true,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.white)),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                labelText: 'Enter number of transaction',
-                                labelStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(19, 5, 10, 5),
+                                EdgeInsets.fromLTRB(19, 5, 10, 5),
                               ),
                             ),
                           ),
@@ -181,22 +132,24 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                       SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {
-                          _showDialog();
+                          if(inpvalue.toString().length > 2)
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>TransferOkay()));
+//                          _showDialog();
                         },
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12)),
-                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          margin: EdgeInsets.symmetric(horizontal: 66),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 10),
                             child: Text(
-                              'Generate Code',
+                              'Confirm',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.blue,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -212,31 +165,5 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
         ),
       ),
     );
-  }
-
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Transaction Code'),
-            titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
-            content: Text('$transferCode'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text("Cancel"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
   }
 }
