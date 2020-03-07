@@ -10,9 +10,12 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
   Color _activeButtonColor = Colors.blue;
   Color _inactiveButtonColor = Colors.black26;
   bool _isbuttonActive = false;
+  var transferCode = 345.4;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
@@ -174,6 +177,31 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () {
+                          _showDialog();
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12)),
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            child: Text(
+                              'Generate Code',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -183,5 +211,31 @@ class _ConfirmPaymentScreenState extends State<ConfirmPaymentScreen> {
         ),
       ),
     );
+  }
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Transaction Code'),
+            titleTextStyle: TextStyle(fontSize: 20, color: Colors.black),
+            content: Text('$transferCode'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text("Cancel"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
 }
